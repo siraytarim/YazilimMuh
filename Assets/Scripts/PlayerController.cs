@@ -106,7 +106,7 @@ public class PlayerCOntroller : MonoBehaviour
         direction.y = jumpForce;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnControllerColliderHit(ControllerColliderHit other)
     {
         if (other.gameObject.tag == "Enemy")
             Manager.gameOver = true;
