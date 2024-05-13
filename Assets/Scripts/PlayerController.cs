@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayerCOntroller : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    
+    [SerializeField] GameObject soruPaneli;
     private CharacterController controller;
     private Vector3 direction;
-    public float forwardSpeed;
+    public static float forwardSpeed=2f;
     public float maxSpeed;
 
     private int desiredLane;  // 0 sol 1 orta 2 sağ
@@ -29,7 +29,6 @@ public class PlayerCOntroller : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-
     }
 
     void Update()
@@ -91,7 +90,7 @@ public class PlayerCOntroller : MonoBehaviour
             targetPoisiton += Vector3.right * laneDistance;
         }
 
-        transform.position = Vector3.Lerp(transform.position, targetPoisiton, 120);
+        transform.position = Vector3.Lerp(transform.position, targetPoisiton, 90);
         controller.center = controller.center;
     }
 
@@ -106,11 +105,21 @@ public class PlayerCOntroller : MonoBehaviour
         direction.y = jumpForce;
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
-            Manager.gameOver = true;
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            soruPaneli.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
+
+   /* private void OnControllerColliderHit(ControllerColliderHit other)
+    {
+        if (other.gameObject.CompareTag("Obstacle"))
+            soruPaneli.SetActive(true);
+        // Manager.gameOver = true;
+    }*/
 
     private IEnumerator Slide()
     {
