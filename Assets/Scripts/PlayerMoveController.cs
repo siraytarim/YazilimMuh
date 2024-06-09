@@ -57,7 +57,7 @@ namespace Player
             //increase speed
             if (forwardSpeed < maxSpeed)
             {
-                forwardSpeed += 0.3f * Time.deltaTime;
+                forwardSpeed += 0.2f * Time.deltaTime;
             }
 
             direction.z = forwardSpeed;

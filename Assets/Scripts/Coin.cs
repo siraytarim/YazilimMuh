@@ -6,7 +6,7 @@ public class Coin : MonoBehaviour
 {
     void Update()
     {
-        transform.Rotate(20 * Time.deltaTime, 0, 0);
+        transform.Rotate(30 * Time.deltaTime, 0, 0);
     }
 
     private void OnTriggerEnter(Collider other)

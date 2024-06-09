@@ -29,9 +29,13 @@ namespace Player
             {
                 secileceksoruDegeri = UnityEngine.Random.Range(0,sorular.Count);
                 secilecekSoru = sorular[secileceksoruDegeri];
-                //sorular.Remove(secilecekSoru);
-
+                Invoke("SoruyuCikar",5f);
             }
+        }
+
+        void SoruyuCikar()
+        {
+            sorular.Remove(secilecekSoru);
         }
 
     }
