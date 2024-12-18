@@ -10,14 +10,13 @@ namespace Player
     public class PlayerController : MonoBehaviour
     {
         public static PlayerController Instance { get; private set; }
-        [SerializeField] GameObject soruPaneli;
         private CharacterController controller;
         private Vector3 direction;
         public float forwardSpeed = 2;
         public float maxSpeed;
 
         private int desiredLane = 1; // 0 sol 1 orta 2 sağ
-        public float laneDistance = 3; // yollar arasındaki mesafe
+        public float laneDistance = 2; // yollar arasındaki mesafe
 
         public float jumpForce;
         public float gravity;
@@ -38,14 +37,12 @@ namespace Player
             else
             {
                 Instance = this;
-                //DontDestroyOnLoad(gameObject); denicem 
             }
         }
 
         void Start()
         {
             controller = GetComponent<CharacterController>();
-            animator = GetComponent<Animator>();
         }
 
         private void FixedUpdate()
@@ -64,30 +61,10 @@ namespace Player
 
             direction.z = forwardSpeed;
 
-            isGrounded = Physics.CheckSphere(groundCheck.position, 0.5f, groundLayer);
-             
-            animator.SetBool("isGameStarted", true);
-            animator.SetBool("IsRunning", true);
-            animator.SetBool("isGrounded", isGrounded);
+            IsGrounded();
+             // animator.SetBool("isGameStarted", true);
 
-            if (controller.isGrounded)
-            {
-                animator.SetBool("IsRunning", true);
-                direction.y = -1;
-                
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    Jump();
-                }
-            }
-            else
-            {
-                animator.SetBool("IsRunning", false);
-               direction.y += gravity * Time.deltaTime; // Yer çekimi etkisi
-               //direction.y += Physics.gravity.y * Time.deltaTime;
-
-            }
-
+            
             if (Input.GetKeyDown(KeyCode.D))
             {
                 //   animator.SetBool("Right", true);
@@ -122,6 +99,26 @@ namespace Player
                 StartCoroutine(Slide());
             }
         }
+        void IsGrounded()
+        {      
+            isGrounded = Physics.CheckSphere(groundCheck.position, 0.5f, groundLayer);
+
+             animator.SetBool("isGorunded", isGrounded);
+
+            if (controller.isGrounded)
+            {
+                direction.y = -1;
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    Jump();
+                }
+            }
+            else
+            {
+                direction.y += gravity * Time.deltaTime; // Yer çekimi etkisi
+            }
+
+        }
 
         void MoveLane(bool goingRight)
         {
@@ -135,39 +132,29 @@ namespace Player
             isGrounded = false;
             direction.y = jumpForce;
         }
-        void IsRunning(){
-            animator.SetBool("IsRunning" , true);
-            
-            
-         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Obstacle"))
-            {
+            if (other.gameObject.CompareTag("Obstacle")){
                 SoruPanelleri.Instance.soruSec();
                 SoruPanelleri.Instance.secilecekSoru.gameObject.SetActive(true);
-                
-               Debug.Log("oyun durdu.");
                 Time.timeScale = 0;
-               
-
             }
         }
 
         private IEnumerator Slide()
         {
             isSliding = true;
-            //animator.SetBool("isSliding",true);
+            animator.SetBool("isSliding",true);
             controller.center = new Vector3(0, -0.5f, 0);
             controller.height = 1;
 
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.7f);
 
             controller.center = new Vector3(0, 0, 0);
             controller.height = 2;
 
-            // animator.SetBool("isSliding", false);
+            animator.SetBool("isSliding", false);
             isSliding = false;
         }
     }

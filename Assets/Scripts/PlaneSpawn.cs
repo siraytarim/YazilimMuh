@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlaneSpawn : MonoBehaviour
 {
     public GameObject[] floor;
-    public GameObject[] environment;
+    //public GameObject[] environment;
     public int zPos;
     public bool creatingSection = false;
      int secNum;
@@ -26,7 +26,7 @@ public class PlaneSpawn : MonoBehaviour
     {
         secNum = Random.Range(0, 3);
         Instantiate(floor[secNum], new Vector3(0, 0, zPos), Quaternion.identity);
-        Instantiate(environment[secNum], new Vector3(-0.01f, 0f, zPos), Quaternion.identity);
+        //Instantiate(environment[secNum], new Vector3(-0.01f, 0f, zPos), Quaternion.identity);
         zPos += 35;
         yield return new WaitForSeconds(2);
         creatingSection = false;

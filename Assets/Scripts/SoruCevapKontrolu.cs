@@ -8,10 +8,8 @@ namespace Player
     public class SoruCevapKontrolu : MonoBehaviour
     {
         public static SoruCevapKontrolu Instance { get; private set; }
-        public Button[] answerButtons; // Cevap butonları
-        
-        [SerializeField] GameObject SorununPaneli;
-         string correctAnswer = "dogrucevap" ; // Doğru cevabın ismi
+        public Button[] answerButtons; // Cevap butonları        
+         string correctAnswer = "correct" ; // Doğru cevabın ismi
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -25,10 +23,10 @@ namespace Player
         }
         void Start()
         {
-            // Her butona tıklandığında ilgili fonksiyonu çağır
             foreach (Button btn in answerButtons)
             {
                 btn.onClick.AddListener(() => CheckAnswer(btn.name));
+                Debug.Log(btn.name);
             }
         }
 
@@ -36,17 +34,15 @@ namespace Player
         {
             if (answer == correctAnswer)
             {
-                Manager.numberOfCoins += 15;
+                Manager.numberOfCoins += 10;
                 Invoke("PanelGeriKapa", .001f);
-                PlayerController.Instance.forwardSpeed = PlayerController.Instance.forwardSpeed;
                 Time.timeScale = 1;
             }
             else
             {
                 Invoke("PanelGeriKapa", .001f);
                 Time.timeScale = 0; // Oyunu durdur
-                Manager.gameOver=true;
-                
+                Manager.gameOver=true;                
             }
         }
 

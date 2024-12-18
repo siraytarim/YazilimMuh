@@ -12,11 +12,11 @@ public class StartGame : MonoBehaviour
         // Butona tıklandığında `ChangeScene` fonksiyonunu çağır
         btn.onClick.AddListener(() => ChangeScene() );
     }
-    void ChangeScene()
+   public  void ChangeScene()
     {
+        Debug.Log("kfdg");
         // Sahneyi değiştir
-        Debug.Log("fg");
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("FirstScene");
     }
    
 }
