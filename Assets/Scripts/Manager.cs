@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
-    public static bool gameOver;
-    public static bool isGameStarted;
-
-    public GameObject gameOverPanel;
-    public GameObject startingText;
-
-    public static int numberOfCoins;
+     public static bool gameOver;
+     public static bool isGameStarted;
+        
+     public GameObject gameOverPanel;
+     public GameObject startingText;
+        
+     public static int numberOfCoins;
 
     public Text coinsText;
     void Start()
@@ -19,13 +21,12 @@ public class Manager : MonoBehaviour
         gameOver = false;
         Time.timeScale = 1;
         numberOfCoins = 0;
-        isGameStarted = false;
+        isGameStarted = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (gameOver)
+        if(gameOver)
         {
             Time.timeScale = 0;
             gameOverPanel.SetActive(true);
@@ -40,3 +41,4 @@ public class Manager : MonoBehaviour
 
     }
 }
+    
