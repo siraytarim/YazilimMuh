@@ -9,7 +9,7 @@ public class PlaneSpawn : MonoBehaviour
     //public GameObject[] environment;
     public int zPos;
     public bool creatingSection = false;
-     int secNum;
+    int secNum;
 
 
     void Update()
