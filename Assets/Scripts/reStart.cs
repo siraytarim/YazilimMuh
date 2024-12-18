@@ -12,7 +12,7 @@ public class reStart : MonoBehaviour
         btn.onClick.AddListener(() => YenidenYükle());
     }
 
-    void YenidenYükle()
+    public void YenidenYükle()
     {
         SceneManager.LoadScene(1);
     }
