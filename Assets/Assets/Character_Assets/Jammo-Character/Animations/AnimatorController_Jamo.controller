@@ -307,6 +307,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isJumping
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: isGrounded
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3434262664031071955}
   m_Solo: 0
@@ -396,7 +399,17 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
+<<<<<<< HEAD
     m_Controller: {fileID: 9100000}
+=======
+    m_Controller: {fileID: 0}
+  - m_Name: isGrounded
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+>>>>>>> ac865e4fb3caa79d4127a36f4893143cfafbc8ee
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -610,7 +623,7 @@ AnimatorStateMachine:
     m_Position: {x: 70, y: -70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7372895040446094411}
-    m_Position: {x: -20, y: 290, z: 0}
+    m_Position: {x: -50, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3434262664031071955}
     m_Position: {x: 210, y: 380, z: 0}
